@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<!DOCTYPE configuration>
+<configuration>
+	<property name="LOG_HOME" value="/data/logs" />
+	
+	<!-- output the running message on console -->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>[%d] [%level] [%thread] [%logger] %msg%n</pattern>
+        </encoder>
+    </appender>
+
+	<!-- output special message on disk -->
+	<appender name="FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>${LOG_HOME}/analytics-web.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder charset="UTF-8">
+			<pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+		<appender-ref ref="FILE" />
+	</appender>
+	
+	<!-- Real time data upgrade message -->
+	<appender name="RealTimeUpgradeService"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_HOME}/realtimeupgrade/realtimeupgrade.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<logger name="RealTimeUpgradeServiceLogger" level="INFO" additivity="false">
+		<appender-ref ref="RealTimeUpgradeService"/>
+	</logger>
+	
+	<if condition='isDefined("log.level")'>
+		<then>
+			<root level="ERROR">
+				<appender-ref ref="ASYNC"/>
+				<if condition='property("log.stdout").equalsIgnoreCase("true")'>
+                    <then>
+                        <appender-ref ref="STDOUT" />
+                    </then>
+                </if>
+			</root>
+		</then>
+		<else>
+			<root level="INFO">
+				<appender-ref ref="ASYNC" />
+			</root>
+		</else>
+	</if>
+	
+</configuration>
+

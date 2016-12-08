@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd 
+    http://www.springframework.org/schema/websocket
+    http://www.springframework.org/schema/websocket/spring-websocket.xsd"
+	default-lazy-init="false">
+	
+	<bean id="websocketMonitorPoint" class="com.toucha.analytics.websocket.WebsocketMonitorEndPoint"/>
+
+	<websocket:handlers allowed-origins="*">
+		<websocket:mapping handler="websocketMonitorPoint" path="/sockjs/monitor"/>
+		<websocket:sockjs/>
+	</websocket:handlers>
+		
+	<websocket:message-broker application-destination-prefix="/pipeline">
+		<websocket:stomp-endpoint path="/refresh" allowed-origins="*">
+			<websocket:sockjs/>
+		</websocket:stomp-endpoint>
+		<websocket:simple-broker prefix="/topic"/>
+	</websocket:message-broker>
+</beans>
+
+	

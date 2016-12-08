@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE c3p0-config>
+<!-- http://www.mchange.com/projects/c3p0/#configuration -->
+<c3p0-config>
+	<default-config>
+		<!-- database configuration -->
+		<property name="user">tydev</property>
+		<property name="password">tester</property>
+		<property name="driverClass">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+		<property name="jdbcUrl">jdbc:sqlserver://192.168.8.118;database=platform-dev;loginTimeout=30</property>
+		
+		<!-- pool basic configuration -->
+		<property name="acquireIncrement">10</property>
+		<property name="initialPoolSize">100</property>		
+		<property name="maxPoolSize">2000</property>
+		<property name="minPoolSize">10</property>
+		
+		<!-- connection time to live -->
+		<property name="idleConnectionTestPeriod">30</property> <!-- seconds -->
+		<property name="maxIdleTime">60</property> <!-- seconds -->
+		
+		<!-- preparedStatement cache -->
+		<property name="maxStatements">0</property>
+		<property name="maxStatementsPerConnection">0</property>
+		
+		<!-- connection Test configuration -->
+		<property name="automaticTestTable">con_test</property>
+		<property name="testConnectionOnCheckin">true</property>
+	
+		<!-- reconnect configuration -->
+		<!-- when decide to use the retry policy, the following configure need to be changed -->
+		<property name="acquireRetryAttempts">3</property>
+		<property name="acquireRetryDelay">1000</property>
+		<property name="checkoutTimeout">3000</property>
+		
+		<!-- Configuring to Debug and Workaround Broken Client Applications  -->
+		<property name="unreturnedConnectionTimeout">120</property>
+		<property name="debugUnreturnedConnectionStackTraces">true</property>
+	</default-config>
+</c3p0-config>
+	

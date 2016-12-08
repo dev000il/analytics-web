@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="analytics-web">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <property name="context-root" value="analytics-web"/>
+        <property name="java-output-path" value="/analytics-web/target/classes"/>
+        <property name="component.exclusion.patterns" value="WEB-INF/lib/slf4j-log4j12-*.jar,WEB-INF/lib/findbugs-annotations-*.jar,WEB-INF/lib/junit-*.jar,WEB-INF/lib/asm-3.1.jar,WEB-INF/lib/asm-commons-3.1.jar,WEB-INF/lib/servlet-api-2.5.jar,WEB-INF/lib/jetty-6.1.26.jar,WEB-INF/lib/jetty-all-7.6.0.v20120127.jar,WEB-INF/lib/jetty-util-6.1.26.jar,WEB-INF/lib/mail-1.4.5.jar,WEB-INF/lib/derby-10.10.2.0.jar,WEB-INF/lib/opencsv-2.3.jar,WEB-INF/lib/stax-api-1.0-2.jar"/>
+    </wb-module>
+</project-modules>
